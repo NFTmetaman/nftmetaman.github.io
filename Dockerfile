@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    libcurl4 \
     libcurl4-openssl-dev \
     libssl-dev \
     libfreetype6-dev \
@@ -20,13 +19,24 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     curl \
-    libssl-dev \
-    zlib1g-dev \
-    && docker-php-ext-install bcmath ctype fileinfo json mbstring openssl pdo pdo_mysql pdo_sqlite sockets tokenizer xml curl mysqli
+    zlib1g-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install bcmath ctype fileinfo json mbstring openssl pdo pdo_mysql pdo_sqlite sockets tokenizer xml curl mysqli
-
+RUN docker-php-ext-install \
+    bcmath \
+    ctype \
+    fileinfo \
+    json \
+    mbstring \
+    openssl \
+    pdo \
+    pdo_mysql \
+    pdo_sqlite \
+    sockets \
+    tokenizer \
+    xml \
+    curl \
+    mysqli
 
 # Enable Apache Rewrite module
 RUN a2enmod rewrite
