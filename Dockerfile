@@ -24,27 +24,8 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install \
-    bcmath \
-    ctype \
-    fileinfo \
-    json \
-    mbstring \
-    openssl \
-    pdo \
-    pdo_mysql \
-    pdo_sqlite \
-    sockets \
-    tokenizer \
-    xml \
-    curl \
-    fileinfo \
-    mbstring \
-    mysqli \
-    openssl \
-    pdo_mysql \
-    pdo_sqlite \
-    sockets
+RUN docker-php-ext-install bcmath ctype fileinfo json mbstring openssl pdo pdo_mysql pdo_sqlite sockets tokenizer xml curl mysqli
+
 
 # Enable Apache Rewrite module
 RUN a2enmod rewrite
