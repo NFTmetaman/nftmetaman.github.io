@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     curl \
     zlib1g-dev \
-    libapache2-mod-php
+    apache2
 
 # Install PHP extensions
 RUN docker-php-ext-install \
