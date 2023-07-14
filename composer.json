@@ -1,5 +1,5 @@
 {
-    "name": "task_crud",
+    "name": "laravel/task_crud",
     "type": "project",
     "description": "Laravel framework.",
     "keywords": ["laravel", "framework"],
