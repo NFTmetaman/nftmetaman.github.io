@@ -40,8 +40,10 @@ class TodoController extends Controller
     if ($filterCreatedAt) {
         $query->whereDate('created_at', $filterCreatedAt);
     }
-    if ($filterStatus) {
-        $query->where('is_completed', $filterStatus);
+    if ($filterStatus === '1') {
+        $query->where('is_completed', true);
+    } elseif ($filterStatus === '0') {
+        $query->where('is_completed', false);
     }
 
     // Pagination

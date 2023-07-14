@@ -15,7 +15,8 @@ return new class extends Migration
         $table->id();
         $table->longText('name');
         $table->longText('task')->nullable();
-        $table->boolean('is_completed')->default(0);
+        $table->boolean('is_incomplete')->default(1); // Set default value to 1 (true) for incomplete tasks
+        $table->boolean('is_completed')->default(0); // Set default value to 0 (false) for completed tasks
         $table->timestamps();
     });
 }

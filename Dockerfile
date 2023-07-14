@@ -1,5 +1,5 @@
 # Use the official PHP image as the base image
-FROM php:7.4-apache
+FROM php:8.2.8-apache
 
 # Set the working directory
 WORKDIR /var/www/html
@@ -10,10 +10,41 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    libcurl4 \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libicu-dev \
+    libzip-dev \
+    curl \
+    libssl-dev \
+    zlib1g-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath xml
+RUN docker-php-ext-install \
+    bcmath \
+    ctype \
+    fileinfo \
+    json \
+    mbstring \
+    openssl \
+    pdo \
+    pdo_mysql \
+    pdo_sqlite \
+    sockets \
+    tokenizer \
+    xml \
+    curl \
+    fileinfo \
+    mbstring \
+    mysqli \
+    openssl \
+    pdo_mysql \
+    pdo_sqlite \
+    sockets
 
 # Enable Apache Rewrite module
 RUN a2enmod rewrite
