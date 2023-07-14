@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     curl \
-    zlib1g-dev
+    zlib1g-dev \
+    libapache2-mod-php
 
 # Install PHP extensions
 RUN docker-php-ext-install \
