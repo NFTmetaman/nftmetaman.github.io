@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     curl \
     libssl-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    && docker-php-ext-install bcmath ctype fileinfo json mbstring openssl pdo pdo_mysql pdo_sqlite sockets tokenizer xml curl mysqli
 
 # Install PHP extensions
 RUN docker-php-ext-install bcmath ctype fileinfo json mbstring openssl pdo pdo_mysql pdo_sqlite sockets tokenizer xml curl mysqli
