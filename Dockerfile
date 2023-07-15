@@ -1,43 +1,33 @@
 # Use the official PHP image as the base image
-FROM php:8.1-apache
+FROM php:8.1-fpm
 
-# Set the working directory
-WORKDIR /var/www/html
-
-# Install dependencies
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    libzip-dev \
-    libcurl4-openssl-dev
+    unzip
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath xml zip curl mysqli
+RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath xml
 
-# Enable Apache Rewrite module
-RUN a2enmod rewrite
-
-# Copy the project files into the container
-COPY . /var/www/html
-
-# Install Composer
+# Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# Copy only necessary files into the container
+COPY composer.json composer.lock ./
 
 # Install project dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Set up environment variables
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+# Copy the rest of the project files into the container
+COPY . .
 
-# Configure Apache
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Expose port 9000 for PHP-FPM
+EXPOSE 9000
 
-# Expose port 80
-EXPOSE 80
-
-# Start Apache service
-CMD ["apache2-foreground"]
+# Start PHP-FPM server
+CMD ["php-fpm"]
