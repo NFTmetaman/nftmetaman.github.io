@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:80
+      - 8000:9000
     depends_on:
       - db
     environment:
@@ -20,7 +20,7 @@ services:
   db:
     image: mysql:8.0
     ports:
-      - 3306:3306  # Change the host port from 3306 to 3306
+      - 3307:3306  # Change the host port from 3306 to 3306
     environment:
       MYSQL_DATABASE: crud
       MYSQL_USER: crudadmin
