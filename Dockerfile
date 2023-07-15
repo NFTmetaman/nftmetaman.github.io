@@ -17,12 +17,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Set the working directory
 WORKDIR /var/www/html
 
-# Copy only necessary files into the container
-COPY composer.json composer.lock ./
-
-# Install project dependencies
-RUN composer install --optimize-autoloader --no-dev
-
 # Copy the rest of the project files into the container
 COPY . .
 
@@ -31,6 +25,9 @@ COPY .env.example .env
 
 # Generate the application key
 RUN php artisan key:generate
+
+# Install project dependencies
+RUN composer install --optimize-autoloader --no-dev
 
 # Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
