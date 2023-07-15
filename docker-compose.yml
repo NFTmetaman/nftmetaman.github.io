@@ -25,3 +25,4 @@ services:
       MYSQL_DATABASE: crud
       MYSQL_USER: crudadmin
       MYSQL_PASSWORD: Testlevelroot500
+      MYSQL_ROOT_PASSWORD: Testlevelroot500
